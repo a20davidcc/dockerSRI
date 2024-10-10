@@ -1,0 +1,33 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	darthvader.starwars.lan. admin.starwars.lan. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 120 )		; Negative Cache TTL
+
+;Hosts tipo NS
+@	IN	NS	darthvader.starwars.lan.
+@		NS	darthsidious
+
+;Hosts Tipo A
+darthvader		IN	A	192.168.20.10
+skywalker		IN	A	192.168.20.101
+skywalker		IN	A	192.168.20.111
+luke			IN	A	192.168.20.22
+darthsidious	IN	A	192.168.20.11
+yoda			IN	A	192.168.20.24
+yoda			IN	A	192.168.20.25
+cp3p0			IN	A	192.168.20.26
+
+;Hosts tipo CNAME
+palpatine		CNAME	A	darthsidious
+
+;Hosts tipo MX
+@				IN	MX	10	cp3p0.starwars.lan.
+
+;Hosts tipo TXT
+lenda			TXT	A	"Que a forza te acompañe"
