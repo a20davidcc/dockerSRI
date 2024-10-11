@@ -109,3 +109,93 @@ lenda        IN  TXT "Que a forza te acompañe"
 ```
 
 ### 4. Instalación da zona primaria inversa e creación de rexistros
+Como no paso anterior o primeiro que faremos será crear a zona inversa no ficheiro `/etc/bind/named.conf.local`, quedará da seguinte maneira:
+ ```
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "starwars.lan" {
+    type master;
+    file "/etc/bind/db.starwars";
+};
+
+zone "20.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.192";
+};
+ ```
+
+O seguinte será crear o ficheiro de configuración da zona inversa, podemos executar o mesmo comando que antes para usar o ficheiro `/etc/bind/db.127`. 
+```
+cp /etc/bind/db.127 /etc/bind/db.192
+```
+
+O ficheiro da zona inversa quedará da seguinte maneira:
+```
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	darthvader.starwars.lan. admin.starwars.lan. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 120 )		; Negative Cache TTL
+;
+
+;Rexistros NS
+@	IN	NS	darthvader.starwars.lan.
+@   IN  NS  darthsidious.starwars.lan.
+
+; Rexistros PTR
+10	IN	PTR	darthvader.starwars.lan.
+101	IN	PTR	skywalker.starwars.lan.
+111	IN	PTR	skywalker.starwars.lan.
+22	IN	PTR	luke.starwars.lan.
+11	IN	PTR	darthsidious.starwars.lan.
+24	IN	PTR	yoda.starwars.lan.
+25	IN	PTR	yoda.starwars.lan.
+26	IN	PTR	cp3p0.starwars.lan.
+``` 
+
+### 5. Comprobación dos rexistros.
+
+#### - nslookup darthvader.starwars.lan localhost
+
+![nslookup_darthvader](./img/darthvader.png)
+
+#### - nslookup skywalker.starwars.lan localhost
+
+![nslookup_skywalker](./img/skywalker.png)
+
+#### - nslookup starwars.lan localhost
+
+Este comando non o resolve xa que non existe ningunha referencia a starwars.local.
+
+![nslookup_starwars](./img/starwars.png)
+
+#### - nslookup -q=mx starwars.lan localhost
+
+![nslookup_mx](./img/mx.png)
+
+#### - nslookup -q=ns starwars.lan localhost
+
+![nslookup_ns](./img/ns.png)
+
+#### - nslookup -q=soa starwars.lan localhost
+
+![nslookup_soa](./img/soa.png)
+
+#### - nslookup -q=txt starwars.lan localhost
+
+![nslookup_txt](./img/txt.png)
+
+#### - nslookup 192.168.20.11 localhost
+
+![nslookup_mx](./img/inversa.png)

@@ -1,1 +1,1 @@
-Esqueleto para comezar un proxecto con bind9
+Configuración e documentación de BIND9 por David Castro
