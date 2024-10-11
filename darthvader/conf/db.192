@@ -2,12 +2,25 @@
 ; BIND reverse data file for local loopback interface
 ;
 $TTL	604800
-@	IN	SOA	localhost. root.localhost. (
+@	IN	SOA	darthvader.starwars.lan. admin.starwars.lan. (
 			      1		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
 			 120 )		; Negative Cache TTL
 ;
-@	IN	NS	localhost.
-1.0.0	IN	PTR	localhost.
+
+;Rexistros NS
+@	IN	NS	darthvader.starwars.lan.
+@   IN  NS  darthsidious.starwars.lan.
+
+; Rexistros PTR
+10	IN	PTR	darthvader.starwars.lan.
+101	IN	PTR	skywalker.starwars.lan.
+111	IN	PTR	skywalker.starwars.lan.
+22	IN	PTR	luke.starwars.lan.
+11	IN	PTR	darthsidious.starwars.lan.
+24	IN	PTR	yoda.starwars.lan.
+25	IN	PTR	yoda.starwars.lan.
+26	IN	PTR	cp3p0.starwars.lan.
+

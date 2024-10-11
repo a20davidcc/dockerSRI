@@ -8,7 +8,7 @@
 
 zone "starwars.lan" {
     type master;
-    file "/etc/bind/db.starwars.lan";
+    file "/etc/bind/db.starwars";
 };
 
 zone "20.168.192.in-addr.arpa" {
