@@ -13,7 +13,6 @@ options {
 	 forwarders {
 	 	8.8.8.8;
 	 };
-	 forward only;
 
 	//========================================================================
 	// If BIND logs error messages about the root key being expired,

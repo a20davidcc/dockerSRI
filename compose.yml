@@ -12,14 +12,14 @@ services:
       - ./darthvader/conf/db.starwars:/etc/bind/db.starwars
       - ./darthvader/conf/db.192:/etc/bind/db.192
 
-  eq1:
-    build: eq1
-    hostname: eq1
-    dns:
-     - 192.168.20.10
-    networks:
-      rededns:
-          ipv4_address: 192.168.20.100
+  #eq1:
+  #  build: eq1
+  #  hostname: eq1
+  #  dns:
+  #   - 192.168.20.10
+  #  networks:
+  #    rededns:
+  #        ipv4_address: 192.168.20.100
 networks:
   rededns:
     ipam:
