@@ -1,6 +1,14 @@
 # Instalación de zonas mestras primarias.
 
-### 1. Comprobación do funcionamento do DNS.
+## Índice
+
+1. [Comprobación do funcionamento do DNS](#1-comprobación-do-funcionamento-do-dns)
+2. [Configuración de reenviadores](#2-configuración-de-reenviadores)
+3. [Instalación da zona primaria directa e creación de rexistros](#3-instalación-da-zona-primaria-directa-e-creación-de-rexistros)
+4. [Instalación da zona primaria inversa e creación de rexistros](#4-instalación-da-zona-primaria-inversa-e-creación-de-rexistros)
+1. [Comprobación dos rexistros](#5-comprobación-dos-rexistros)
+
+## 1. Comprobación do funcionamento do DNS.
 Para comprobar que o noso DNS funciona correctamente executamos o seguinte comando.
 ```bash
 dig @localhost www.edu.xunta.gal
@@ -12,7 +20,7 @@ A salida que obtuvemos de este comando é a seguinte.
 Como podemos ver na imaxe, resólveo perfectamente, xa que como nos indica, estamos tendo 1 resposta de 1 consulta que fixemos, ademáis devolve un rexistro tipo A coa IP 85.91.64.65 para www.edu.xunta.gal.
 
 
-### 2. Configuración de reenviadores.
+## 2. Configuración de reenviadores.
 Para engadir reenviadores ao noso servidor BIND9 teremos que modificar o ficheiro  `named.conf.options`. Neste ficheiro encontraremos un apartado de forwarders que por defecto aparece comentado, teremos que descomentalo eliminando as // do principio da línea e configurar o noso reenviador. 
 O ficheiro quedará da seguinte maneira:
 ```bash
@@ -50,7 +58,7 @@ Esta é a salida que nos mostra:
 ![med.gob.es](./img/captura2.png)
 
 
-### 3. Instalación da zona primaria directa e creación de rexistros
+## 3. Instalación da zona primaria directa e creación de rexistros
 O primeiro que temos que facer é crear a zona nun ficheiro chamado `/etc/bind/named.conf.local`. O ficheiro quedará da seguinte forma:
 ```bash
 //
@@ -108,7 +116,7 @@ palpatine    IN  CNAME darthsidious
 lenda        IN  TXT "Que a forza te acompañe"
 ```
 
-### 4. Instalación da zona primaria inversa e creación de rexistros
+## 4. Instalación da zona primaria inversa e creación de rexistros
 Como no paso anterior o primeiro que faremos será crear a zona inversa no ficheiro `/etc/bind/named.conf.local`, quedará da seguinte maneira:
  ```bash
 //
@@ -164,40 +172,40 @@ $TTL	604800
 26	IN	PTR	cp3p0.starwars.lan.
 ``` 
 
-### 5. Comprobación dos rexistros.
+## 5. Comprobación dos rexistros.
 
 Faremos todas estas comprobacións dende un equipo cliente.
 
-##### - nslookup darthvader.starwars.lan
+#### - nslookup darthvader.starwars.lan
 
 ![nslookup_darthvader](./img/darthvader.png)
 
-##### - nslookup skywalker.starwars.lan
+#### - nslookup skywalker.starwars.lan
 
 ![nslookup_skywalker](./img/skywalker.png)
 
-##### - nslookup starwars.lan
+#### - nslookup starwars.lan
 
 Este comando non o resolve xa que non existe ningunha referencia a starwars.local.
 
 ![nslookup_starwars](./img/starwars.png)
 
-##### - nslookup -q=mx starwars.lan
+#### - nslookup -q=mx starwars.lan
 
 ![nslookup_mx](./img/mx.png)
 
-##### - nslookup -q=ns starwars.lan
+#### - nslookup -q=ns starwars.lan
 
 ![nslookup_ns](./img/ns.png)
 
-##### - nslookup -q=soa starwars.lan
+#### - nslookup -q=soa starwars.lan
 
 ![nslookup_soa](./img/soa.png)
 
-##### - nslookup -q=txt lenda.starwars.lan
+#### - nslookup -q=txt lenda.starwars.lan
 
 ![nslookup_txt](./img/txt.png)
 
-##### - nslookup 192.168.20.11
+#### - nslookup 192.168.20.11
 
 ![nslookup_mx](./img/inversa.png)
