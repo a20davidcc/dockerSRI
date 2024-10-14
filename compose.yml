@@ -1,6 +1,6 @@
 services:
   darthvader:
-    build: darthvader
+    build: dnsserver
     hostname: darthvader
     networks:
       rededns:

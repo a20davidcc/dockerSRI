@@ -30,4 +30,4 @@ palpatine    IN  CNAME darthsidious
 @   IN  MX  10  c3p0
 
 ; Hosts Tipo TXT
-lenda        IN  TXT "Que a forza te acompañe"
+lenda        IN  TXT "Que a forza te acompanhe"

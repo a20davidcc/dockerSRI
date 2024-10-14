@@ -15,7 +15,7 @@ Como podemos ver na imaxe, resólveo perfectamente, xa que como nos indica, esta
 ### 2. Configuración de reenviadores.
 Para engadir reenviadores ao noso servidor BIND9 teremos que modificar o ficheiro  `named.conf.options`. Neste ficheiro encontraremos un apartado de forwarders que por defecto aparece comentado, teremos que descomentalo eliminando as // do principio da línea e configurar o noso reenviador. 
 O ficheiro quedará da seguinte maneira:
-```
+```bash
 options {
 	directory "/var/cache/bind";
 
@@ -42,7 +42,7 @@ options {
 };
 ```
 Para comprobar que esto está funcionando correctamente executaremos este comando:
-```
+```bash
 dig @localhost www.med.gob.es
 ```
 
@@ -52,7 +52,7 @@ Esta é a salida que nos mostra:
 
 ### 3. Instalación da zona primaria directa e creación de rexistros
 O primeiro que temos que facer é crear a zona nun ficheiro chamado `/etc/bind/named.conf.local`. O ficheiro quedará da seguinte forma:
-```
+```bash
 //
 // Do any local configuration here
 //
@@ -68,11 +68,11 @@ zone "starwars.lan" {
 ```
 Como vemos, estamos configurando unha zona chamada *starwars.lan*, que é de tipo máster e que ten como ficheiro `/etc/bind/db.starwars`. Este ficheiro actualmente non existe polo que temos que crealo.
 Para iso, podemos copialo a partir dun ficheiro sí existente, o ficheiro `/etc/bind/db.local`. Para copialo executaremos esto:
-```
+```bash
 cp /etc/bind/db.local /etc/bind/db.starwars
 ```
 A partir de aquí xa podemos comenzar a editalo. O ficheiro quedará da seguinte maneira:
-```
+```bash
 ;
 ; BIND data file for local loopback interface
 ;
@@ -110,7 +110,7 @@ lenda        IN  TXT "Que a forza te acompañe"
 
 ### 4. Instalación da zona primaria inversa e creación de rexistros
 Como no paso anterior o primeiro que faremos será crear a zona inversa no ficheiro `/etc/bind/named.conf.local`, quedará da seguinte maneira:
- ```
+ ```bash
 //
 // Do any local configuration here
 //
@@ -131,12 +131,12 @@ zone "20.168.192.in-addr.arpa" {
  ```
 
 O seguinte será crear o ficheiro de configuración da zona inversa, podemos executar o mesmo comando que antes para usar o ficheiro `/etc/bind/db.127`. 
-```
+```bash
 cp /etc/bind/db.127 /etc/bind/db.192
 ```
 
 O ficheiro da zona inversa quedará da seguinte maneira:
-```
+```bash
 ;
 ; BIND reverse data file for local loopback interface
 ;
@@ -166,36 +166,38 @@ $TTL	604800
 
 ### 5. Comprobación dos rexistros.
 
-#### - nslookup darthvader.starwars.lan localhost
+Faremos todas estas comprobacións dende un equipo cliente.
+
+##### - nslookup darthvader.starwars.lan
 
 ![nslookup_darthvader](./img/darthvader.png)
 
-#### - nslookup skywalker.starwars.lan localhost
+##### - nslookup skywalker.starwars.lan
 
 ![nslookup_skywalker](./img/skywalker.png)
 
-#### - nslookup starwars.lan localhost
+##### - nslookup starwars.lan
 
 Este comando non o resolve xa que non existe ningunha referencia a starwars.local.
 
 ![nslookup_starwars](./img/starwars.png)
 
-#### - nslookup -q=mx starwars.lan localhost
+##### - nslookup -q=mx starwars.lan
 
 ![nslookup_mx](./img/mx.png)
 
-#### - nslookup -q=ns starwars.lan localhost
+##### - nslookup -q=ns starwars.lan
 
 ![nslookup_ns](./img/ns.png)
 
-#### - nslookup -q=soa starwars.lan localhost
+##### - nslookup -q=soa starwars.lan
 
 ![nslookup_soa](./img/soa.png)
 
-#### - nslookup -q=txt starwars.lan localhost
+##### - nslookup -q=txt lenda.starwars.lan
 
 ![nslookup_txt](./img/txt.png)
 
-#### - nslookup 192.168.20.11 localhost
+##### - nslookup 192.168.20.11
 
 ![nslookup_mx](./img/inversa.png)
