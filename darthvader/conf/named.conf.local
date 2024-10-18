@@ -9,11 +9,16 @@
 zone "starwars.lan" {
     type master;
     file "db.starwars";
-    allow-transfer { 192.168.20.11; };
+    allow-transfer { key "starwars"; };
 };
 
 zone "20.168.192.in-addr.arpa" {
     type master;
     file "db.192";
-    allow-transfer { 192.168.20.11; };
+    allow-transfer { key "starwars"; };
+};
+
+key "starwars" {
+	algorithm hmac-sha256;
+	secret "Irj050sKTXqhEbGsAk8czPI7y/up0Pj2OUYq1D4qo9c=";
 };

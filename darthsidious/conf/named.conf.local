@@ -10,10 +10,16 @@ zone "starwars.lan" {
     type slave;
     file "db.starwars";
     masters { 192.168.20.10; };
+    allow-transfer { key "starwars"; };
 };
 
 zone "20.168.192.in-addr.arpa" {
     type slave;
     file "db.192";
     masters { 192.168.20.10; };
+    allow-transfer { key "starwars"; };
+};
+
+server 192.168.20.10 {
+    key { starwars; }
 };
