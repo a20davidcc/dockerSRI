@@ -7,13 +7,13 @@
 //include "/etc/bind/zones.rfc1918";
 
 zone "starwars.lan" {
-    type master;
+    type slave;
     file "db.starwars";
-    allow-transfer { 192.168.20.11; };
+    masters { 192.168.20.10; };
 };
 
 zone "20.168.192.in-addr.arpa" {
-    type master;
+    type slave;
     file "db.192";
-    allow-transfer { 192.168.20.11; };
+    masters { 192.168.20.10; };
 };

@@ -3,11 +3,11 @@
 ;
 $TTL	604800
 @	IN	SOA	darthvader.starwars.lan. admin.starwars.lan. (
-			      1		; Serial
-			 604800		; Refresh
-			  86400		; Retry
+			10			; Serial
+			604800		; Refresh
+			86400		; Retry
 			2419200		; Expire
-			 120 )		; Negative Cache TTL
+			120 )		; Negative Cache TTL
 ;
 
 ;Rexistros NS
