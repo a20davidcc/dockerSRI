@@ -6,20 +6,25 @@
 // organization
 //include "/etc/bind/zones.rfc1918";
 
+key "transferencia" {
+	algorithm hmac-sha256;
+	secret "bD83Et9sdXIfAy4HKqkLVH76cSfpWZKg4N/pMovAAeQ=";
+};
+
+server 192.168.20.10 {
+    keys { transferencia; };
+};
+
 zone "starwars.lan" {
     type slave;
     file "db.starwars";
     masters { 192.168.20.10; };
-    allow-transfer { key "starwars"; };
 };
 
 zone "20.168.192.in-addr.arpa" {
     type slave;
     file "db.192";
     masters { 192.168.20.10; };
-    allow-transfer { key "starwars"; };
 };
 
-server 192.168.20.10 {
-    key { starwars; }
-};
+
